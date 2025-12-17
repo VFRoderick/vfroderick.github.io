@@ -42,7 +42,7 @@ At Mortenson, I proposed and implemented our first ArcGIS Enterprise system and 
 ## Project Spotlights
 
 ```mermaid
-xychart
+xychart-beta
     title "GIS Adoption at Mortenson"
     x-axis ["Q3 22", "Q4 22", "Q1 23", "Q2 23", "Q3 23", "Q4 23", "Q1 24", "Q2 24", "Q3 24", "Q4 24", "Q1 25", "Q2 25", "Q3 25"]
     y-axis "Entitlements" 0 --> 2500
