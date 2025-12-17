@@ -38,8 +38,10 @@ jobs:
             --toc
             --toc-depth=1
             --resource-path=.
+            --lua-filter=pandoc/diagram.lua
             --lua-filter=pandoc/paper.lua
             --lua-filter=pandoc/date.lua
+            --extract-media=website
             src/index.md
 
       - name: Setup Pages
