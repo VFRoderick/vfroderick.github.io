@@ -1,5 +1,7 @@
 ---
-mermaid: true
+diagram:
+  engine:
+    mermaid: true
 title: Roderick Perendy | GIS & Construction Innovation
 author: Roderick Perendy
 shortbio: Senior GIS Developer | Automation | Backend Spatial Systems

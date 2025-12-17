@@ -11,4 +11,6 @@ website:
          --resource-path=. \
          --lua-filter=pandoc/paper.lua \
          --lua-filter=pandoc/date.lua \
+         --lua-filter=pandoc/diagram.lua \
+         --extract-media=website \
          src/index.md
