@@ -1,181 +1,108 @@
 ---
-title: Template homepage
-author: Templato Urnehm
-shortbio: PhD student in 👽 science
-description-meta: PhD student in 👽 science
-og-url: https://basicpage.github.io
-location: Some lab, office 777
-email: noreply@noemail.com
-clickable-email: false
-picture: img/profile.png
+title: Roderick Perendy | GIS & Construction Innovation
+author: Roderick Perendy
+shortbio: Senior GIS Developer | Automation | Backend Spatial Systems
+description-meta: Senior GIS Developer focused on spatial backends, automation, and enterprise architecture.
+og-url: https://vfroderick.github.io
+#og-picture: website\img\profile-me.png
+location: Orlando, FL
+email: roderick.perendy@mortenson.com
+clickable-email: true
+picture: img/IMG_0609.jpeg
 picture-round: false
 side-by-side: true
-pronouns: They/Them
-og-picture: https://basicpage.github.io/img/profile.png
-orcid: 0000-0000-0000-0000
-dblp: https://dblp.org/
-scholar: https://scholar.google.com/
-hal: https://hal.science/
-mastodon: https://lipn.info
-github: basicpage
-gitlab: gitlab
-bitbucket: bitbucket.com
-bluesky: https://bsky.app/
-linkedin: https://www.linkedin.com
+github: vfroderick
+linkedin: https://www.linkedin.com/in/roderick-perendy-7510967b
 footer: >-
-  Based on the
-  [basicpage template](https://github.com/basicpage/basicpage.github.io),
-  made to be easy to use! 🎓
+  [Senior Software Engineer Portfolio](https://vfroderick.github.io)
 ---
 
-I am a (fake) PhD student, working on 👽 science on all kinds of related topics.
+# Senior GIS Developer
 
-My workflow is usually to use <kbd>Ctrl</kbd> + <kbd>C</kbd> /
-<kbd>Ctrl</kbd> + <kbd>V</kbd>. 🫣
+I build and scale the technical foundations required for complex spatial data. My work focuses on backend architecture: databases, APIs, and automation pipelines that make high-performance mapping possible.
 
-> [!NOTE]
-> This website is obviously a fake one, but it's meant to be very easy to use.
-> Just follow the README of the
-> [Github repository](https://github.com/basicpage/basicpage.github.io).
+At Mortenson, I proposed and implemented our first ArcGIS Enterprise system and helped scale adoption across the organization.
 
-# Publications
+## Technical Stack
 
-## Conference papers
+<p align="left">
+  <img src="https://skillicons.dev/icons?i=nodejs,react,python,java,scala,cs,mysql,azure,linux,docker,pytorch,idea,vscode,postman&perline=14" />
+</p>
 
-``` json {.paper}
-"title": "Towards automatic academic pages 2",
-"authors": "Templato Urnehm, U. N. Owen, Wan Morotter",
-"venue": "Principles of Awesomeness (PAW)",
-"year": "2024",
-"url": "https://basicpage.github.io"
+| Category | Tools and Platforms |
+| :--- | :--- |
+| **Spatial Intelligence** | **Esri** ArcGIS Enterprise, Arcade, GeoEvent Server, Utility Network |
+| **Backend & APIs** | **Node.js**, Python, Java, Scala, C#, REST APIs, MATLAB |
+| **Infrastructure** | **Azure**, Azure DevOps, Docker, CI/CD, Linux |
+| **Data Management** | **MS SQL Server**, MySQL, SQLite, Azure Blob Storage |
+
+## Project Spotlights
+
+```mermaid
+---
+config:
+  xyChart:
+    labelFontSize: 8
+    xAxis:
+      labelFontSize: 8
+    yAxis:
+      labelFontSize: 8
+    width: 500
+    height: 250
+    showDataLabel: false
+  themeVariables:
+    xyChart:
+      plotColorPalette: "#1f4e79, #7030a0"
+      xAxisLabelColor: "#FFFFFF"
+      yAxisLabelColor: "#FFFFFF"
+      yAxisTickColor: "#FFFFFF"
+---
+xychart
+  title "Growth in GIS at Mortenson"
+  x-axis ["Q3 22", "Q4 22", "Q1 23", "Q2 23", "Q3 23", "Q4 23", "Q1 24", "Q2 24", "Q3 24", "Q4 24", "Q1 25", "Q2 25", "Q3 25"]
+  y-axis "Users" 0 --> 2000
+  %% Enterprise Entitlements (Purple)
+  bar [47, 61, 171, 229, 299, 370, 439, 554, 678, 801, 967, 1188, 1436]
+  %% AGOL Entitlements (Blue)
+  bar [123, 133, 155, 187, 223, 236, 272, 313, 368, 444, 525, 717, 981]
 ```
 
-``` json {.paper}
-"title": "Towards automatic academic pages",
-"authors": "Templato Urnehm, U. N. Owen",
-"awards": "Automatic Award",
-"venue": "Principles of Awesomeness (PAW)",
-"year": "2023",
-"url": "https://basicpage.github.io",
-"files": [
-  { "text": "Paper", "type": "pdf", "src": "foo.pdf" },
-  { "text": "Bibtex", "type": "bib", "src": "foo.bib" },
-  { "text": "Formalisation", "type": "code", "src": "foo.v" }
-]
-```
+- [**Scaling Enterprise Location Intelligence**](https://files/Mortenson%20GIS%20Growth-ESRI.pdf)
+- [**Construction Planning Application**](https://storymaps.arcgis.com/stories/830f37d3e71248ca923f839b44c11440)
+  - Esri UC Presentation | San Diego, CA 2024
 
-## Journal papers
+####
 
-``` yaml {.paper}
-title: Yet another yaml parser 3
-authors: Templato Urnehm
-awards: 
-  - Yet another "Yet another" award
-  - Never-ending Work Award
-venue: Proceedings of Nihilism
-year: 2029
-url: https://basicpage.github.io
-files:
-  - text: Paper
-    type: pdf
-    scr: foo.pdf
-  - text: Bibtex
-    type: bib
-    src: foo.bib
-```
+- **High-Performance Scheduling Integration**
+  - Azure Synapse Scala Development
+  - Common Data Model Solution - Over 20 different schedule file formats
+  - Scalable with Apache Spark Runtime
+  
+- **AI Computer Vision for Construction Monitoring**
+  - Production, Quality, Environmental Monitoring Solution
+  - Integrates with GIS field worker responses to constantly refine training datasets
 
-``` yaml {.papers}
-papers:
-  - title: Yet another yaml parser 2
-    authors: Templato Urnehm
-    venue: Proceedings of Nihilism
-    year: 2027
-    files:
-      - text: Paper
-        type: pdf
-        scr: foo.pdf
-      - text: Bibtex
-        type: bib
-        src: foo.bib
-  - title: Yet another yaml parser
-    authors: Templato Urnehm
-    awards: Yet another "Yet another" award
-    venue: Proceedings of Nihilism
-    year: 2025
-    files:
-      - text: Paper
-        type: pdf
-        scr: foo.pdf
-      - text: Bibtex
-        type: bib
-        src: foo.bib
-      - text: Some link
-        type: link
-        src: fake.link.xyz
-      - text: Repo
-        type: git
-        src: github.com
-```
 
-``` json {.paper}
-"title": "How to tame your wagon",
-"authors": "Templato Urnehm",
-"venue": "Journal of Automatic Rejection (JAR)",
-"year": "2022"
-```
+## Professional Experience and Impact
 
-## Drafts
+### Systems Architecture and DevOps
 
-``` json {.paper}
-"title": "TBD",
-"authors": "TBD",
-"awards": [
-  "Best Draft Award",
-  "Test-of-time Award for works which just never leave the draft stage"
-],
-"files": [
-  { "text": "🐱 video", "type": "video", "src": "foo.mov" },
-  { "text": "Poem", "type": "txt", "src": "foo.txt" },
-  { "text": "My picture", "type": "img", "src": "img/profile.png" },
-  { "text": "💣", "type": "zip", "src": "foo.zip" },
-  { "text": "Slides", "type": "slides", "src": "foo.key" },
-  { "text": "Some random file", "src": "foo.rand" }
-]
-```
+- Proposed and led the transition to ArcGIS Enterprise, scaling adoption from hundreds to thousands of entitlements.
+- Built a standardized Docker + reverse-proxy dev environment to support multiple app versions cleanly.
+- Developed CI/CD pipelines and automation for database maintenance and deployment workflows.
+- Created ArcGIS Monitor dashboards for node-based health and root-cause analysis.
 
-## Talks
+### Custom Spatial Solutions
 
-``` json {.papers}
-{
-  "title": "Talk 1",
-  "authors": "Templato Urnehm",
-  "venue": "My room"
-},
-{
-  "title": "Secret talk",
-  "authors": "Templato Urnehm",
-  "year": "1990"
-},
-{
-  "title": "Talk 3",
-  "authors": "Templato Urnehm",
-  "venue": "Don't remember…",
-  "year": "???"
-}
-```
+- Developed Java/Scala tooling around MPXJ to unify construction scheduling formats into a single data model.
+- Designed optimized SQL Server geodatabases with automation for high-frequency updates.
+- Implemented real-time telemetry workflows using GeoEvent Server and fleet/asset tracking integrations.
+- Engineered a Utility Network dataset for complex material tracking on large-scale projects.
 
-# Education
+## Education and Recognition
 
-- I was able to paint with my hands in kindergarten.
-- I went to high school where I studied stuff.
-- Master degree in hand painting.
+- **Speaker at Esri UC 2024:** [Plan of the Day (POD) for Wind Projects](https://storymaps.arcgis.com/stories/830f37d3e71248ca923f839b44c11440)
+- **Bachelor of Science in Mechanical Engineering** | University of North Dakota
+- **Bachelor of Science in Economics** | University of Minnesota
 
-# Teaching
-
-- I am teaching the TD sessions on the 👽 science course.
-
-# Community service
-
-- 32 reviews for Journal of Awesomeness.
-- 1 review for a cool conference.
-- PC member of the journal of my school.
+![Mortenson Esri EA Partner](https://img.shields.io/badge/Mortenson-Esri_EA_Partner-005E95?style=for-the-badge&logo=esri)
