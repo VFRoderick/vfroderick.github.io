@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArcGIS Enterprise Architecture</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 10px;
+      background: transparent;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <pre class="mermaid">
+architecture-beta
+    group azure(cloud)[Azure]
+
+    group prod(server)[Production] in azure
+    group data_prod(database)[Data Tier] in prod
+    
+    group stage(server)[Stage] in azure
+    group data_stage(database)[Data Tier] in stage
+
+    service lb(internet)[Load Balancer] in azure
+    
+    %% Production
+    service wa1(internet)[Web Adaptor] in prod
+    service portal1(server)[Portal] in prod
+    service ags1(server)[ArcGIS Server HA] in prod
+    service geo1(server)[GeoEvent] in prod
+    service sql1(database)[SQL Server] in data_prod
+    service ds1(disk)[Data Store] in data_prod
+
+    %% Stage
+    service wa2(internet)[Web Adaptor] in stage
+    service portal2(server)[Portal] in stage
+    service ags2(server)[ArcGIS Server] in stage
+    service sql2(database)[SQL Server] in data_stage
+    service ds2(disk)[Data Store] in data_stage
+
+    %% Edges
+    lb:B --> T:wa1
+    lb:B --> T:wa2
+    
+    wa1:B --> T:portal1
+    portal1:R --> L:ags1
+    ags1:R --> L:geo1
+    portal1:B --> T:sql1
+    sql1:R --> L:ds1
+    
+    wa2:B --> T:portal2
+    portal2:R --> L:ags2
+    portal2:B --> T:sql2
+    sql2:R --> L:ds2
+  </pre>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ 
+      startOnLoad: true,
+      theme: 'neutral'
+    });
+  </script>
+</body>
+</html>

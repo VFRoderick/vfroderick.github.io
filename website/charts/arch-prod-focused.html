@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArcGIS Enterprise Architecture</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 10px;
+      background: transparent;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <pre class="mermaid">
+architecture-beta
+    group azure(cloud)[Azure Cloud - ArcGIS Enterprise]
+
+    group web(internet)[Web Tier] in azure
+    group app(server)[Application Tier] in azure
+    group data(database)[Data Tier] in azure
+
+    service users(internet)[Users] in azure
+    service lb(server)[Load Balancer] in web
+    service wa(internet)[Web Adaptor] in web
+    
+    service portal(server)[Portal] in app
+    service hosting(server)[Hosting Server x2] in app
+    service mapping(server)[Mapping Server x4] in app
+    service gp(server)[GP Server] in app
+    service geoevent(server)[GeoEvent Server] in app
+    
+    service sql(database)[SQL Server] in data
+    service datastore(disk)[ArcGIS Data Store] in data
+
+    users:R --> L:lb
+    lb:R --> L:wa
+    wa:B --> T:portal
+    portal:L --> R:hosting
+    hosting:B --> T:mapping
+    mapping:R --> L:gp
+    gp:B --> T:geoevent
+    portal:B --> T:sql
+    sql:R --> L:datastore
+    hosting:B --> T:datastore
+  </pre>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ 
+      startOnLoad: true,
+      theme: 'base',
+      themeVariables: {
+        primaryColor: '#e3f2fd',
+        primaryTextColor: '#1565c0',
+        primaryBorderColor: '#1976d2',
+        lineColor: '#546e7a',
+        secondaryColor: '#e8f5e9',
+        tertiaryColor: '#fff3e0'
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArcGIS Enterprise Architecture</title>
+  <script src="https://code.iconify.design/iconify-icon/2.0.0/iconify-icon.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+      color: #fff;
+    }
+    .container { 
+      width: 100%; 
+      height: 100%; 
+      position: relative;
+      padding: 10px;
+    }
+    
+    h1 { 
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1rem; 
+      color: #fff; 
+      font-weight: 500;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      z-index: 100;
+    }
+    
+    /* SVG lines layer */
+    .lines-svg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .connector {
+      stroke: rgba(255,255,255,0.6);
+      stroke-width: 2;
+      fill: none;
+    }
+    
+    /* Central hub */
+    .hub {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 140px;
+      height: 100px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      z-index: 50;
+    }
+    .hub iconify-icon { font-size: 32px; color: #2563eb; }
+    .hub span { font-size: 0.65rem; color: #1e40af; font-weight: 600; margin-top: 4px; }
+    
+    /* Node circles */
+    .node {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 20;
+      transform: translate(-50%, -50%);
+    }
+    .node iconify-icon { font-size: 20px; color: #1e40af; }
+    .node-label {
+      position: absolute;
+      top: 54px;
+      font-size: 0.45rem;
+      color: #fff;
+      text-align: center;
+      white-space: nowrap;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+      font-weight: 500;
+    }
+    
+    /* Environment badges */
+    .env-badge {
+      position: absolute;
+      font-size: 0.5rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      z-index: 100;
+    }
+    .env-badge.prod { background: rgba(34,197,94,0.9); top: 8%; left: 5%; }
+    .env-badge.mgmt { background: rgba(251,191,36,0.9); color: #333; top: 8%; left: 50%; transform: translateX(-50%); }
+    .env-badge.stage { background: rgba(59,130,246,0.9); top: 8%; right: 5%; }
+    
+    .attribution {
+      position: absolute;
+      bottom: 5px;
+      right: 10px;
+      font-size: 0.45rem;
+      color: rgba(255,255,255,0.5);
+    }
+    
+    @media print {
+      body { background: #2563eb; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ArcGIS Enterprise on Azure</h1>
+    
+    <div class="env-badge prod">Production</div>
+    <div class="env-badge mgmt">Management</div>
+    <div class="env-badge stage">Staging</div>
+    
+    <!-- SVG Connector Lines -->
+    <svg class="lines-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <!-- Production connections (left side) -->
+      <path class="connector" d="M 50,50 Q 30,35 12,18" />
+      <path class="connector" d="M 50,50 Q 25,40 8,32" />
+      <path class="connector" d="M 50,50 Q 20,50 6,50" />
+      <path class="connector" d="M 50,50 Q 25,60 8,68" />
+      <path class="connector" d="M 50,50 Q 30,70 15,82" />
+      <path class="connector" d="M 50,50 Q 35,75 28,90" />
+      
+      <!-- Management connections (top/bottom) -->
+      <path class="connector" d="M 50,50 Q 50,35 50,22" />
+      <path class="connector" d="M 50,50 Q 45,70 38,85" />
+      <path class="connector" d="M 50,50 Q 55,70 62,85" />
+      
+      <!-- Staging connections (right side) -->
+      <path class="connector" d="M 50,50 Q 70,35 88,18" />
+      <path class="connector" d="M 50,50 Q 75,40 92,32" />
+      <path class="connector" d="M 50,50 Q 80,50 94,50" />
+      <path class="connector" d="M 50,50 Q 75,60 92,68" />
+      <path class="connector" d="M 50,50 Q 70,75 85,88" />
+    </svg>
+    
+    <!-- Central Hub: ArcGIS Monitor -->
+    <div class="hub">
+      <iconify-icon icon="carbon:dashboard"></iconify-icon>
+      <span>ArcGIS Monitor</span>
+    </div>
+    
+    <!-- PRODUCTION Nodes (Left Side) -->
+    <div class="node" style="top: 18%; left: 12%;">
+      <iconify-icon icon="carbon:api"></iconify-icon>
+      <span class="node-label">Web Adapter</span>
+    </div>
+    <div class="node" style="top: 32%; left: 8%;">
+      <iconify-icon icon="carbon:globe"></iconify-icon>
+      <span class="node-label">Portal</span>
+    </div>
+    <div class="node" style="top: 50%; left: 6%;">
+      <iconify-icon icon="carbon:cloud-services"></iconify-icon>
+      <span class="node-label">Hosting x2</span>
+    </div>
+    <div class="node" style="top: 68%; left: 8%;">
+      <iconify-icon icon="carbon:bare-metal-server"></iconify-icon>
+      <span class="node-label">Mapping x4</span>
+    </div>
+    <div class="node" style="top: 82%; left: 15%;">
+      <iconify-icon icon="carbon:data-connected"></iconify-icon>
+      <span class="node-label">GeoEvent</span>
+    </div>
+    <div class="node" style="top: 90%; left: 28%;">
+      <iconify-icon icon="carbon:db2-database"></iconify-icon>
+      <span class="node-label">SQL + Datastore</span>
+    </div>
+    
+    <!-- MANAGEMENT Nodes (Top/Center) -->
+    <div class="node" style="top: 22%; left: 50%;">
+      <iconify-icon icon="carbon:connect"></iconify-icon>
+      <span class="node-label">Citrix</span>
+    </div>
+    <div class="node" style="top: 85%; left: 38%;">
+      <iconify-icon icon="carbon:virtual-desktop"></iconify-icon>
+      <span class="node-label">VDI Host</span>
+    </div>
+    <div class="node" style="top: 85%; left: 62%;">
+      <iconify-icon icon="carbon:folder"></iconify-icon>
+      <span class="node-label">File Server</span>
+    </div>
+    
+    <!-- STAGING Nodes (Right Side) -->
+    <div class="node" style="top: 18%; left: 88%;">
+      <iconify-icon icon="carbon:api"></iconify-icon>
+      <span class="node-label">Web Adapter</span>
+    </div>
+    <div class="node" style="top: 32%; left: 92%;">
+      <iconify-icon icon="carbon:globe"></iconify-icon>
+      <span class="node-label">Portal</span>
+    </div>
+    <div class="node" style="top: 50%; left: 94%;">
+      <iconify-icon icon="carbon:cloud-services"></iconify-icon>
+      <span class="node-label">Hosting</span>
+    </div>
+    <div class="node" style="top: 68%; left: 92%;">
+      <iconify-icon icon="carbon:bare-metal-server"></iconify-icon>
+      <span class="node-label">Mapping x2</span>
+    </div>
+    <div class="node" style="top: 88%; left: 85%;">
+      <iconify-icon icon="carbon:db2-database"></iconify-icon>
+      <span class="node-label">SQL + Datastore</span>
+    </div>
+    
+    <span class="attribution">Icons: IBM Carbon (Apache 2.0)</span>
+  </div>
+</body>
+</html>

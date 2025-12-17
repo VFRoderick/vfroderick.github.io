@@ -11,7 +11,14 @@
 <html prefix="og: https://ogp.me/ns#" lang="en">
 <head>
   <script type="module">
-    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    // Register Esri icon pack
+    mermaid.registerIconPacks([
+      {
+        name: 'esri',
+        loader: () => fetch('esri_icons/esri.json').then(res => res.json())
+      }
+    ]);
     mermaid.initialize({ startOnLoad: true, theme: 'dark' });
   </script>
   <meta name="viewport" content="width=device-width">

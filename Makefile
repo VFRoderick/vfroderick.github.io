@@ -1,4 +1,4 @@
-.PHONY: website
+.PHONY: website serve
 
 website:
 	pandoc --standalone \
@@ -14,3 +14,6 @@ website:
          --lua-filter=pandoc/diagram.lua \
          --extract-media=website \
          src/index.md
+
+serve: website
+	cd website && python -m http.server 8000

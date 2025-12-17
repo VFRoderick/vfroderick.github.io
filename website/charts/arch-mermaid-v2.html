@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArcGIS Enterprise Architecture</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 15px;
+      background: #f8f9fa;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+    .subtitle {
+      text-align: center;
+      color: #666;
+      font-size: 0.8rem;
+      margin-bottom: 15px;
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <h2>ArcGIS Enterprise on Azure</h2>
+  <p class="subtitle">High-Availability Multi-Environment Architecture</p>
+  
+  <pre class="mermaid">
+architecture-beta
+    group azure(cloud)[Azure Cloud]
+
+    group prod(server)[Production] in azure
+    group stage(server)[Stage] in azure
+    group mgmt(server)[Management] in azure
+
+    %% Internet entry
+    service internet(internet)[Internet] in azure
+    service lb(server)[Load Balancer] in azure
+
+    %% Production Environment
+    service wa_prod(internet)[Web Adaptor] in prod
+    service portal_prod(server)[Portal] in prod
+    service host_prod(server)[Hosting HA x2] in prod
+    service map_prod(server)[Mapping HA x4] in prod
+    service gp_prod(server)[GP Server] in prod
+    service geo_prod(server)[GeoEvent] in prod
+    service file_prod(disk)[File Server] in prod
+    service sql_prod(database)[SQL Server] in prod
+    service ds_prod(database)[Data Store] in prod
+
+    %% Stage Environment
+    service wa_stage(internet)[Web Adaptor] in stage
+    service portal_stage(server)[Portal] in stage
+    service ags_stage(server)[AGS Servers] in stage
+    service geo_stage(server)[GeoEvent] in stage
+    service sql_stage(database)[SQL Server] in stage
+    service ds_stage(database)[Data Store] in stage
+
+    %% Management Environment
+    service monitor(server)[ArcGIS Monitor] in mgmt
+    service vdi(server)[VDI Host] in mgmt
+
+    %% Connections - Internet to Load Balancer
+    internet:R --> L:lb
+
+    %% Load Balancer to Web Adaptors
+    lb:B --> T:wa_prod
+    lb:B --> T:wa_stage
+
+    %% Production flow
+    wa_prod:B --> T:portal_prod
+    portal_prod:R --> L:host_prod
+    host_prod:R --> L:map_prod
+    map_prod:B --> T:gp_prod
+    gp_prod:R --> L:geo_prod
+    portal_prod:B --> T:sql_prod
+    sql_prod:R --> L:ds_prod
+    geo_prod:B --> T:file_prod
+
+    %% Stage flow
+    wa_stage:B --> T:portal_stage
+    portal_stage:R --> L:ags_stage
+    ags_stage:R --> L:geo_stage
+    portal_stage:B --> T:sql_stage
+    sql_stage:R --> L:ds_stage
+
+    %% Management connections
+    monitor:R --> L:vdi
+    monitor:L --> R:portal_prod
+    monitor:L --> R:portal_stage
+  </pre>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    
+    mermaid.initialize({ 
+      startOnLoad: true,
+      theme: 'default',
+      architecture: {
+        useMaxWidth: true
+      }
+    });
+  </script>
+</body>
+</html>
