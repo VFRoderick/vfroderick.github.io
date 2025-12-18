@@ -1,134 +1,150 @@
 cloud-architecture-diagram
 
 direction down
-// Title
 title Mortenson ArcGIS Enterprise on Azure
 
 Internet [icon: cloud]
 
-// Top-level subscription group
 MortensonSubscription [icon: azure, label: "Mortenson Azure Subscription"] {
 
   // Production Resource Group
   ProductionRG [icon: azure-resource-group, label: "Production Resource Group", color: green] {
     ProductionLB [icon: azure-load-balancer, label: "Load Balancer"]
 
-    ProductionVNet [icon: azure-virtual-network, label: "Production Virtual Network"] {
-      ProductionWebNSG [icon: azure-nsg, label: "Web NSG"] {
-        ProductionWebSubnet [icon: network, label: "Web Subnet"] {
-          ProdArcGISWebAdapter [icon: azure-vm, label: "ArcGIS Web Adapter"]
-        }
+    ProductionVNet [icon: azure-virtual-network, label: "Production Virtual Network", color: teal] {
+      
+      ProductionWebNSG [icon: azure-nsg, label: "Web NSG", color: sky] {
+        ProdWeb01 [icon: azure-vm, label: "Web Adapter"]
       }
 
-      ProductionAppNSG [icon: azure-nsg, label: "Application NSG"] {
-        ProductionAppSubnet [icon: network, label: "Application Subnet"] {
-          ProdArcGISHosting1 [icon: azure-vm, label: "ArcGIS Hosting 1"]
-          ProdArcGISHosting2 [icon: azure-vm, label: "ArcGIS Hosting 2"]
-          ProdArcGISMapping1 [icon: azure-vm, label: "ArcGIS Mapping 1"]
-          ProdArcGISMapping2 [icon: azure-vm, label: "ArcGIS Mapping 2"]
-          ProdArcGISMappingSolar1 [icon: azure-vm, label: "ArcGIS Mapping Solar 1"]
-          ProdArcGISMappingSolar2 [icon: azure-vm, label: "ArcGIS Mapping Solar 2"]
-          ProdAGSGP [icon: azure-vm, label: "AGS GP Server"]
-          ProdFileServer [icon: azure-vm, label: "File Server"]
-          ProdGeoJobe [icon: azure-vm, label: "GeoJobe"]
-          ProdGeoEvent [icon: azure-vm, label: "GeoEvent"]
-          ProdArcGISPortal [icon: azure-vm, label: "ArcGIS Portal"]
-        }
+      ProductionAppNSG [icon: azure-nsg, label: "Application NSG", color: purple] {
+        ProdPrt01 [icon: azure-vm, label: "Portal"]
+        ProdArc01 [icon: azure-vm, label: "Hosting 1"]
+        ProdArc02 [icon: azure-vm, label: "Hosting 2"]
+        ProdMap01 [icon: azure-vm, label: "Mapping 1"]
+        ProdMap02 [icon: azure-vm, label: "Mapping 2"]
+        ProdMap03 [icon: azure-vm, label: "Mapping Solar 1"]
+        ProdMap04 [icon: azure-vm, label: "Mapping Solar 2"]
+        ProdGp01 [icon: azure-vm, label: "GP Server"]
+        ProdGvt01 [icon: azure-vm, label: "GeoEvent"]
+        ProdGbe01 [icon: azure-vm, label: "GeoJobe"]
+        ProdFs01 [icon: azure-vm, label: "File Server"]
       }
 
-      ProductionDataNSG [icon: azure-nsg, label: "Data NSG"] {
-        ProductionDataSubnet [icon: network, label: "Data Subnet"] {
-          ProdSQLServer [icon: azure-vm, label: "SQL Server"]
-          ProdArcGISDatastore [icon: azure-vm, label: "ArcGIS Datastore"]
-        }
+      ProductionDataNSG [icon: azure-nsg, label: "Data NSG", color: red] {
+        ProdSql01 [icon: azure-sql-server, label: "SQL Server"]
+        ProdDs01 [icon: azure-database, label: "Datastore"]
       }
     }
 
     ProductionAzureServices [icon: azure, label: "Azure Services"] {
-      ProdAzureBackup [icon: azure, label: "Azure Backup"]
-      ProdAzureBlobStorage [icon: azure, label: "Azure Blob Storage"]
-      ProdAzureFilesStorage [icon: azure, label: "Azure Files Storage (HA Config Store)"]
-      ProdAzureDefender [icon: azure, label: "Azure Defender"]
+      ProdAzureBackup [icon: azure-backup, label: "Backup"]
+      ProdAzureBlobStorage [icon: azure-blob-storage, label: "Blob Storage"]
+      ProdAzureFilesStorage [icon: azure-files, label: "Files (Config)"]
+      ProdAzureDefender [icon: azure-defender, label: "Defender"]
     }
   }
 
   // Management Resource Group
   ManagementRG [icon: azure-resource-group, label: "Management Resource Group", color: purple] {
-    ManagementVNet [icon: azure-virtual-network, label: "Management Virtual Network"] {
-      ManagementNSG [icon: azure-nsg, label: "Management NSG"] {
-        ManagementSubnet [icon: network, label: "Management Subnet"] {
-          MgmtCitrixConnector [icon: azure-vm, label: "Citrix Connector"]
-          MgmtVDIHost [icon: azure-vm, label: "VDI Host with GPU"]
-          MgmtArcGISMonitor [icon: azure-vm, label: "ArcGIS Monitor"]
-        }
-      }
+    ManagementVNet [icon: azure-virtual-network, label: "Management Virtual Network", color: teal] {
+      MgmtCc01 [icon: azure-vm, label: "Citrix Connector"]
+      MgmtGpu02 [icon: azure-vm, label: "VDI Host"]
+      MgmtMon01 [icon: azure-monitor, label: "ArcGIS Monitor"]
     }
   }
 
   // Staging Resource Group
-  StagingRG [icon: azure-resource-group, label: "Stage Resource Group", color: orange] {
+  StagingRG [icon: azure-resource-group, label: "Stage Resource Group", color: blue] {
     StagingLB [icon: azure-load-balancer, label: "Load Balancer"]
 
-    StagingVNet [icon: azure-virtual-network, label: "Stage Virtual Network"] {
-      StagingWebNSG [icon: azure-nsg, label: "Web NSG"] {
-        StagingWebSubnet [icon: network, label: "Web Subnet"] {
-          StgArcGISWebAdapter [icon: azure-vm, label: "ArcGIS Web Adapter"]
-        }
+    StagingVNet [icon: azure-virtual-network, label: "Stage Virtual Network", color: teal] {
+      
+      StagingWebNSG [icon: azure-nsg, label: "Web NSG", color: sky] {
+        StgWeb01 [icon: azure-vm, label: "Web Adapter"]
       }
 
-      StagingAppNSG [icon: azure-nsg, label: "Application NSG"] {
-        StagingAppSubnet [icon: network, label: "Application Subnet"] {
-          StgAGSMapping [icon: azure-vm, label: "AGS Mapping"]
-          StgAGSSolarMapping [icon: azure-vm, label: "AGS Solarmapping"]
-          StgArcGISPortal [icon: azure-vm, label: "ArcGIS Portal"]
-          StgGeoEvent [icon: azure-vm, label: "GeoEvent"]
-          StgAGSHosting [icon: azure-vm, label: "AGS Hosting"]
-          StgAGSGP [icon: azure-vm, label: "AGS GP"]
-          StgFileServer [icon: azure-vm, label: "File Server"]
-        }
+      StagingAppNSG [icon: azure-nsg, label: "Application NSG", color: purple] {
+        StgPrt01 [icon: azure-vm, label: "Portal"]
+        StgArc01 [icon: azure-vm, label: "Hosting"]
+        StgMap01 [icon: azure-vm, label: "Mapping"]
+        StgMap02 [icon: azure-vm, label: "Solarmapping"]
+        StgGp01 [icon: azure-vm, label: "GP Server"]
+        StgGvt01 [icon: azure-vm, label: "GeoEvent"]
+        StgFs01 [icon: azure-vm, label: "File Server"]
       }
 
-      StagingDataNSG [icon: azure-nsg, label: "Data NSG"] {
-        StagingDataSubnet [icon: network, label: "Data Subnet"] {
-          StgArcGISDatastore [icon: azure-vm, label: "ArcGIS Datastore"]
-          StgSQLServer [icon: azure-vm, label: "SQL Server"]
-        }
+      StagingDataNSG [icon: azure-nsg, label: "Data NSG", color: red] {
+        StgSql01 [icon: azure-sql-server, label: "SQL Server"]
+        StgDs01 [icon: azure-database, label: "Datastore"]
       }
     }
 
     StagingAzureServices [icon: azure, label: "Azure Services"] {
-      StgAzureBackup [icon: azure, label: "Azure Backup"]
-      StgAzureStorage [icon: azure, label: "Azure Storage"]
-      StgAzureDefender [icon: azure, label: "Azure Defender"]
+      StgAzureBackup [icon: azure-backup, label: "Backup"]
+      StgAzureStorage [icon: azure-storage, label: "Storage"]
+      StgAzureDefender [icon: azure-defender, label: "Defender"]
     }
   }
 }
 
-// Internet to Load Balancers
-Internet > ProductionLB: [thickness: 3]
-Internet > StagingLB: [thickness: 3]
+// === INTERNET TO LOAD BALANCERS ===
+Internet - ProductionLB: [thickness: 5, color: blue]
+Internet - StagingLB: [thickness: 5, color: blue]
 
-// Load Balancers to Web Adapters
-ProductionLB > ProdArcGISWebAdapter: [thickness: 3]
-StagingLB > StgArcGISWebAdapter: [thickness: 3]
+// === PRODUCTION INTERNAL FLOW ===
+ProductionLB - ProdWeb01: [thickness: 4, color: blue]
+ProdWeb01 - ProdPrt01: [thickness: 4, color: blue]
 
-// VNet Peering
-ProductionVNet <-> ManagementVNet: Peer [style: dashed, thickness: 3]
-StagingVNet <-> ManagementVNet: Peer [style: dashed, thickness: 3]
+// Portal to federated servers (Production)
+ProdPrt01 - ProdArc01: [thickness: 3, color: blue]
+ProdPrt01 - ProdArc02: [thickness: 3, color: blue]
+ProdPrt01 - ProdMap01: [thickness: 3, color: blue]
+ProdPrt01 - ProdMap02: [thickness: 3, color: blue]
+ProdPrt01 - ProdMap03: [thickness: 3, color: blue]
+ProdPrt01 - ProdMap04: [thickness: 3, color: blue]
+ProdPrt01 - ProdGp01: [thickness: 3, color: blue]
+ProdPrt01 - ProdGvt01: [thickness: 3, color: blue]
 
-// Citrix to VDI
-MgmtCitrixConnector > MgmtVDIHost: [thickness: 3]
+// Data tier connections (Production)
+ProdArc01 - ProdDs01: [thickness: 3, color: blue]
+ProdArc02 - ProdDs01: [thickness: 3, color: blue]
+ProdMap01 - ProdSql01: [thickness: 3, color: blue]
+ProdMap02 - ProdSql01: [thickness: 3, color: blue]
+ProdMap03 - ProdSql01: [thickness: 3, color: blue]
+ProdMap04 - ProdSql01: [thickness: 3, color: blue]
+ProdGp01 - ProdSql01: [thickness: 3, color: blue]
+ProdGvt01 - ProdDs01: [thickness: 3, color: blue]
 
-// VDI Admin Access
-MgmtVDIHost > ProductionDataSubnet: admin [thickness: 4]
-MgmtVDIHost > ProductionAppSubnet: admin [thickness: 4]
-MgmtVDIHost > StagingDataSubnet: admin [thickness: 4]
-MgmtVDIHost > StagingAppSubnet: admin [thickness: 4]
+// === STAGING INTERNAL FLOW ===
+StagingLB - StgWeb01: [thickness: 4, color: blue]
+StgWeb01 - StgPrt01: [thickness: 4, color: blue]
 
-// ArcGIS Monitor (read-only)
-MgmtArcGISMonitor > ProductionWebSubnet: read-only [thickness: 4]
-MgmtArcGISMonitor > ProductionAppSubnet: read-only [thickness: 4]
-MgmtArcGISMonitor > ProductionDataSubnet: read-only [thickness: 4]
-MgmtArcGISMonitor > StagingWebSubnet: read-only [thickness: 4]
-MgmtArcGISMonitor > StagingAppSubnet: read-only [thickness: 4]
-MgmtArcGISMonitor > StagingDataSubnet: read-only [thickness: 4]
+// Portal to federated servers (Staging)
+StgPrt01 - StgArc01: [thickness: 3, color: blue]
+StgPrt01 - StgMap01: [thickness: 3, color: blue]
+StgPrt01 - StgMap02: [thickness: 3, color: blue]
+StgPrt01 - StgGp01: [thickness: 3, color: blue]
+StgPrt01 - StgGvt01: [thickness: 3, color: blue]
+
+// Data tier connections (Staging)
+StgArc01 - StgDs01: [thickness: 3, color: blue]
+StgMap01 - StgSql01: [thickness: 3, color: blue]
+StgMap02 - StgSql01: [thickness: 3, color: blue]
+StgGp01 - StgSql01: [thickness: 3, color: blue]
+StgGvt01 - StgDs01: [thickness: 3, color: blue]
+
+// === VNET PEERING ===
+ProductionVNet - ManagementVNet: Peer [style: dashed, thickness: 5, color: orange]
+StagingVNet - ManagementVNet: Peer [style: dashed, thickness: 5, color: orange]
+
+// === CITRIX TO VDI ===
+MgmtCc01 - MgmtGpu02: [thickness: 5, color: purple]
+
+// === VDI ADMIN ACCESS ===
+MgmtGpu02 - ProductionVNet: admin [thickness: 5, color: red]
+MgmtGpu02 - StagingVNet: admin [thickness: 5, color: red]
+
+// === ARCGIS MONITOR ===
+MgmtMon01 - ProductionVNet: monitor [style: dashed, thickness: 5, color: green]
+MgmtMon01 - StagingVNet: monitor [style: dashed, thickness: 5, color: green]
